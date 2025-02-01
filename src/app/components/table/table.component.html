@@ -2,27 +2,48 @@
   <div class="table-container">
     <p-table
       [columns]="cols"
-      [value]="products"
+      [value]="pokemons"
       showGridlines
       [paginator]="true"
-      [rows]="5"
-      [rowsPerPageOptions]="[5, 10, 20, 25]"
+      [rows]="10"
+      [rowsPerPageOptions]="[10, 20, 50, 100]"
       [tableStyle]="{ 'min-width': '50rem', 'table-layout': 'fixed' }"
     >
       <ng-template #header let-columns>
         <tr>
-                <th *ngFor="let col of cols" [pSortableColumn]="col.sortable ? col.field : undefined">
-                    {{ col.header }}
-                    <p-sortIcon *ngIf="col.sortable" [field]="col.field"></p-sortIcon>
-                </th>
-            </tr>
+          <th
+            *ngFor="let col of cols"
+            [pSortableColumn]="col.sortable ? col.field : undefined"
+          >
+            {{ col.header }}
+            <p-sortIcon *ngIf="col.sortable" [field]="col.field"></p-sortIcon>
+          </th>
+        </tr>
       </ng-template>
+
       <ng-template #body let-rowData let-columns="columns">
         <tr>
           <td *ngFor="let col of columns" class="flex-column">
-            {{ rowData[col.field] }}
+            <ng-container *ngIf="col.field !== 'image'; else imageTemplate">
+              {{ rowData?.[col.field] ?? '-' }}
+            </ng-container>
           </td>
         </tr>
+      </ng-template>
+
+      <ng-template #imageTemplate let-rowData>
+        <td>
+             <p>{{ rowData.image}}</p>
+          <img
+            [src]="rowData.image || 'default_image_url'"
+            [alt]="rowData.name"
+            width="50"
+            height="50"
+          />
+          <ng-template #noImage>
+        
+          </ng-template>
+        </td>
       </ng-template>
     </p-table>
   </div>
