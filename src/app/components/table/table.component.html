@@ -11,10 +11,11 @@
     >
       <ng-template #header let-columns>
         <tr>
-          <th *ngFor="let col of columns" class="flex-column">
-            {{ col.header }}
-          </th>
-        </tr>
+                <th *ngFor="let col of cols" [pSortableColumn]="col.sortable ? col.field : undefined">
+                    {{ col.header }}
+                    <p-sortIcon *ngIf="col.sortable" [field]="col.field"></p-sortIcon>
+                </th>
+            </tr>
       </ng-template>
       <ng-template #body let-rowData let-columns="columns">
         <tr>

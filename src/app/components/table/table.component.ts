@@ -4,13 +4,11 @@ import { CommonModule } from '@angular/common';
 import { ProductService } from '../../service/productservice';
 import { Product } from '../../interface/product';
 
-
 interface Column {
   field: string;
   header: string;
+  sortable: boolean;
 }
-
-
 
 @Component({
   selector: 'app-table',
@@ -32,11 +30,11 @@ export class TableComponent {
     });
 
     this.cols = [
-      { field: 'code', header: 'Code' },
-      { field: 'name', header: 'Name' },
-      { field: 'category', header: 'Category' },
-      { field: 'quantity', header: 'Quantity' },
-      { field: 'rating', header: 'Rating' },
+      { field: 'code', header: 'Code', sortable: false },
+      { field: 'name', header: 'Name', sortable: true },
+      { field: 'category', header: 'Category', sortable: true },
+      { field: 'quantity', header: 'Quantity', sortable: true },
+      { field: 'rating', header: 'Rating', sortable: false },
     ];
   }
 }
