@@ -3,7 +3,7 @@ import { TableModule } from 'primeng/table';
 import { CommonModule } from '@angular/common';
 import { Pokemon } from '../../interface/pokemon';
 import { PokemonService } from '../../service/pokemonservice';
-
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 interface Column {
   field: string;
@@ -14,7 +14,7 @@ interface Column {
 @Component({
   selector: 'app-table',
   standalone: true,
-  imports: [TableModule, CommonModule],
+  imports: [TableModule, CommonModule, ProgressSpinnerModule],
   templateUrl: './table.component.html',
   styleUrl: './table.component.scss',
   providers: [PokemonService],
@@ -28,14 +28,15 @@ export class TableComponent implements OnInit {
   ngOnInit() {
     this.pokemonService.getAllPokemons().subscribe((data) => {
       this.pokemons = data;
+      console.log(data);
     });
 
     this.cols = [
-      { field: 'id', header: 'ID', sortable: true },
+      { field: 'image', header: 'Image', sortable: false },
       { field: 'name', header: 'Name', sortable: true },
+      { field: 'id', header: 'ID', sortable: false },
       { field: 'height', header: 'Height', sortable: true },
       { field: 'weight', header: 'Weight', sortable: true },
-      { field: 'image', header: 'Image', sortable: false }, // Новая колонка для изображения
     ];
   }
 }
