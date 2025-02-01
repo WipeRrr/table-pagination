@@ -1,1 +1,28 @@
-<p>table works!</p>
+<div class="card">
+  <div class="table-container">
+    <p-table
+      [columns]="cols"
+      [value]="products"
+      showGridlines
+      [paginator]="true"
+      [rows]="5"
+      [rowsPerPageOptions]="[5, 10, 20, 25]"
+      [tableStyle]="{ 'min-width': '50rem', 'table-layout': 'fixed' }"
+    >
+      <ng-template #header let-columns>
+        <tr>
+          <th *ngFor="let col of columns" class="flex-column">
+            {{ col.header }}
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template #body let-rowData let-columns="columns">
+        <tr>
+          <td *ngFor="let col of columns" class="flex-column">
+            {{ rowData[col.field] }}
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
