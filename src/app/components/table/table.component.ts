@@ -28,7 +28,6 @@ export class TableComponent implements OnInit {
   ngOnInit() {
     this.pokemonService.getAllPokemons().subscribe((data) => {
       this.pokemons = data;
-      console.log(data);
     });
 
     this.cols = [
