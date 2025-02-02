@@ -56,11 +56,22 @@ table td {
 
 @media (max-width: 600px) {
   table {
-    font-size: 12px;
+    width: 100%;
+    table-layout: fixed; /* Заставляем таблицу использовать фиксированное распределение столбцов */
+    overflow-x: auto; /* Разрешаем прокрутку по горизонтали */
+    display: block; /* Делаем таблицу блочным элементом */
+    white-space: nowrap; /* Запрещаем перенос строк */
   }
 
-  table th,
-  table td {
-    width: 20%;
+  /* Убираем масштабирование */
+  html, body {
+    overflow-x: hidden; /* Убираем горизонтальную прокрутку */
+  }
+
+  /* Заголовки таблицы */
+  table th, table td {
+    text-align: center; /* Горизонтальное выравнивание */
+    vertical-align: middle; /* Вертикальное выравнивание */
+    padding: 8px;
   }
 }
