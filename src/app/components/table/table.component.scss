@@ -1,7 +1,6 @@
 .table-container {
   display: flex;
   width: 100%;
-  flex-wrap: wrap;
 }
 
 .flex-column {
@@ -18,60 +17,4 @@
 img {
   max-width: 100%;
   max-height: 100%;
-}
-
-table {
-  width: 100%;
-  table-layout: fixed;
-  border-collapse: collapse;
-  display: block;
-  overflow-x: auto;
-  white-space: nowrap;
-}
-
-table th,
-table td {
-  word-wrap: break-word;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  padding: 8px;
-}
-
-
-
-@media (max-width: 768px) {
-  table {
-    font-size: 14px;
-  }
-
-  table th,
-  table td {
-    width: 20%;
-  }
-
-  table {
-    overflow-x: auto;
-  }
-}
-
-@media (max-width: 600px) {
-  table {
-    width: 100%;
-    table-layout: fixed; /* Заставляем таблицу использовать фиксированное распределение столбцов */
-    overflow-x: auto; /* Разрешаем прокрутку по горизонтали */
-    display: block; /* Делаем таблицу блочным элементом */
-    white-space: nowrap; /* Запрещаем перенос строк */
-  }
-
-  /* Убираем масштабирование */
-  html, body {
-    overflow-x: hidden; /* Убираем горизонтальную прокрутку */
-  }
-
-  /* Заголовки таблицы */
-  table th, table td {
-    text-align: center; /* Горизонтальное выравнивание */
-    vertical-align: middle; /* Вертикальное выравнивание */
-    padding: 8px;
-  }
 }
