@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TableModule } from 'primeng/table';
 import { CommonModule } from '@angular/common';
-import { ProductService } from '../../service/productservice';
-import { Product } from '../../interface/product';
+import { Pokemon } from '../../interface/pokemon';
+import { PokemonService } from '../../service/pokemonservice';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 interface Column {
   field: string;
@@ -12,29 +13,30 @@ interface Column {
 
 @Component({
   selector: 'app-table',
-  imports: [TableModule, CommonModule],
+  standalone: true,
+  imports: [TableModule, CommonModule, ProgressSpinnerModule],
   templateUrl: './table.component.html',
   styleUrl: './table.component.scss',
-  providers: [ProductService],
+  providers: [PokemonService],
 })
-export class TableComponent {
-  products!: Product[];
-
+export class TableComponent implements OnInit {
+  pokemons!: Pokemon[];
   cols!: Column[];
 
-  constructor(private productService: ProductService) {}
+  constructor(private pokemonService: PokemonService) {}
 
   ngOnInit() {
-    this.productService.getProducts().then((data) => {
-      this.products = data;
+    this.pokemonService.getAllPokemons().subscribe((data) => {
+      this.pokemons = data;
+      console.log(data);
     });
 
     this.cols = [
-      { field: 'code', header: 'Code', sortable: false },
+      { field: 'image', header: 'Image', sortable: false },
       { field: 'name', header: 'Name', sortable: true },
-      { field: 'category', header: 'Category', sortable: true },
-      { field: 'quantity', header: 'Quantity', sortable: true },
-      { field: 'rating', header: 'Rating', sortable: false },
+      { field: 'id', header: 'ID', sortable: false },
+      { field: 'height', header: 'Height', sortable: true },
+      { field: 'weight', header: 'Weight', sortable: true },
     ];
   }
 }
